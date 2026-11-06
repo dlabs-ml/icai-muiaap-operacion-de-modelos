@@ -25,7 +25,7 @@
 
 `~>` Uso `json=` para serializar el cuerpo, `Accept` para indicar que espero JSON y un timeout para limitar la espera. Valido status y estructura por separado. Un `POST` que supera el timeout puede haber llegado al servidor, así que dejo el reintento como decisión de la persona que usa la app y rechazo redirecciones que reenviarían las medidas.
 
-`~>` En Wine mantengo la [interfaz de S6](../zip_semana6/REPORT.md). El gateway distingue errores de entrada, indisponibilidad, timeout, fallo de conexión y respuestas inválidas. Conserva el ID remoto si la API lo devuelve en el cuerpo de éxito o en la cabecera; el identificador que ve el usuario lo genera el controlador local.
+`~>` En Wine mantengo la [interfaz de S6](../semana6/zip_semana6/REPORT.md). El gateway distingue errores de entrada, indisponibilidad, timeout, fallo de conexión y respuestas inválidas. Conserva el ID remoto si la API lo devuelve en el cuerpo de éxito o en la cabecera; el identificador que ve el usuario lo genera el controlador local.
 
 ## Ejecución reproducible
 
