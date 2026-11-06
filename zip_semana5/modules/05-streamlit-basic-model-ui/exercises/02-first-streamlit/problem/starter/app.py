@@ -42,6 +42,7 @@ def render_inference_error(st: Any) -> None:
 def collect_values(st: Any) -> tuple[bool, dict[str, float]]:
     values: dict[str, float] = {}
     with st.form("wine_quality_form"):
+        # Muestro etiquetas legibles y envío al modelo las claves canónicas de S4.
         for field in FIELD_SPECS:
             values[field.name] = st.number_input(
                 field.label,

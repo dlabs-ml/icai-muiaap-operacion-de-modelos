@@ -164,6 +164,7 @@ def main() -> None:
     render_state(st, state)
     if state.phase == "error" and st.session_state[LAST_VALUES_KEY]:
         if st.button("Reintentar"):
+            # Recupero el último envío aunque haya cambios pendientes en el formulario.
             retry_state = controller.submit(st.session_state[LAST_VALUES_KEY])
             st.session_state[LAST_STATE_KEY] = retry_state
             st.rerun()
