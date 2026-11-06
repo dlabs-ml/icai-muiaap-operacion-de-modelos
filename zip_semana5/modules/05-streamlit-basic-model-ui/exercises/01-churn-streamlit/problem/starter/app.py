@@ -49,6 +49,7 @@ def render_prediction(st: Any, result: ChurnPrediction) -> None:
 
 def run_app(st: Any, predictor: Predictor) -> None:
     submitted, values = collect_profile(st)
+    # Espero al envío para que editar el perfil no vuelva a ejecutar el modelo.
     if not submitted:
         st.info("Completa el formulario y pulsa «Calcular riesgo».")
         return
