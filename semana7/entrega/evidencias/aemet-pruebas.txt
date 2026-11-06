@@ -1,10 +1,11 @@
-$ uv run --locked --project semana7/modules/07-http-rest-clients python -m unittest discover -s semana7/entrega/aemet -v
+$ uv run --locked python -m unittest discover -s entrega/aemet -v
 test_busca_indicativo_y_descarga_el_periodo_del_enunciado (test_climatologia.ClimatologiaTest.test_busca_indicativo_y_descarga_el_periodo_del_enunciado) ... ok
 test_exporta_el_primer_dia_aunque_el_servidor_lo_devuelva_despues (test_climatologia.ClimatologiaTest.test_exporta_el_primer_dia_aunque_el_servidor_lo_devuelva_despues) ... ok
 test_no_descarga_un_enlace_ajeno_a_aemet (test_climatologia.ClimatologiaTest.test_no_descarga_un_enlace_ajeno_a_aemet) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.002s
+Ran 3 tests in 0.003s
 
 OK
+
 Pruebas locales con respuestas simuladas. La consulta real está documentada aparte.

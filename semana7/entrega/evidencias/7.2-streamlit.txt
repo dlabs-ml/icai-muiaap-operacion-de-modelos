@@ -1,4 +1,0 @@
-Modo demo: demo-ui-v1
-HTTP real: success needs_review wine-quality-demo-v1 26d4ea0754
-HTTP 503: error Modelo no disponible Comprueba el bundle configurado o avisa al responsable técnico. 4f735c4efa
-Retry con servicio recuperado: TelemetrySnapshot(requests_total=3, requests_success=2, requests_error=1, errors_by_code={'artifact_unavailable': 1}, latency_mean_ms=46.798, latency_p95_ms=74.167, model_versions=('wine-quality-demo-v1',), preprocessing_versions=('wine-red-features-v1',))

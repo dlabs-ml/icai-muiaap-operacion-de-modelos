@@ -1,9 +1,0 @@
-{
-  "machine_id": "pump-017",
-  "measurements": {
-    "temperature_c": 91.2,
-    "vibration_mm_s": 8.4,
-    "pressure_bar": 4.7,
-    "runtime_hours": 12840
-  }
-}
