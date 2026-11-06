@@ -1,0 +1,71 @@
+newman
+
+Práctica APIs Públicas
+
+→ Usuarios
+  GET https://jsonplaceholder.typicode.com/users [200 OK, 6.61kB, 47ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Actividad aleatoria
+  GET https://www.boredapi.com/api/activity [200 OK, 906B, 65ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Pikachu
+  GET https://pokeapi.co/api/v2/pokemon/pikachu [200 OK, 310.4kB, 33ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Crear post simulado
+  POST https://jsonplaceholder.typicode.com/posts [201 Created, 1.15kB, 348ms]
+  ✓  HTTP 201
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Listar posts
+  GET https://jsonplaceholder.typicode.com/posts [200 OK, 28.47kB, 17ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Crear usuario simulado en ReqRes
+  POST https://reqres.in/api/users [201 Created, 2.76kB, 131ms]
+  ✓  HTTP 201
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Cinco Pokémon
+  GET https://pokeapi.co/api/v2/pokemon?limit=5 [200 OK, 1.53kB, 16ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+→ Consultar el Pokémon elegido
+  GET https://pokeapi.co/api/v2/pokemon/bulbasaur [200 OK, 283.99kB, 19ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Contrato del ejercicio
+
+┌─────────────────────────┬────────────────────┬───────────────────┐
+│                         │           executed │            failed │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│              iterations │                  1 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│                requests │                  8 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│            test-scripts │                  8 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│      prerequest-scripts │                  0 │                 0 │
+├─────────────────────────┼────────────────────┼───────────────────┤
+│              assertions │                 24 │                 0 │
+├─────────────────────────┴────────────────────┴───────────────────┤
+│ total run duration: 811ms                                        │
+├──────────────────────────────────────────────────────────────────┤
+│ total data received: 626.27kB (approx)                           │
+├──────────────────────────────────────────────────────────────────┤
+│ average response time: 84ms [min: 16ms, max: 348ms, s.d.: 105ms] │
+└──────────────────────────────────────────────────────────────────┘

@@ -1,11 +1,10 @@
-"""Starter del cliente HTTP. Completa los TODO sin modificar la API."""
+"""Cliente HTTP para la API docente de bombas."""
 
 from __future__ import annotations
 
 from typing import Any
 
-# El TODO de la práctica usará este cliente para realizar la petición HTTP.
-import requests  # noqa: F401
+import requests
 
 
 class PredictionClientError(RuntimeError):
@@ -22,9 +21,36 @@ def request_prediction(
     session: Any | None = None,
 ) -> dict[str, Any]:
     """Envía una predicción y devuelve un objeto JSON de respuesta."""
-    # TODO 3: selecciona `session` o `requests` y envía POST con `json=`,
-    # `Accept` y `timeout`. Comprueba los argumentos con test_client.py.
-    # TODO 4: llama a `raise_for_status()` y conserva el status de HTTPError.
-    # TODO 5: traduce Timeout y ConnectionError a PredictionClientError.
-    # TODO 6: convierte la respuesta con `.json()` y exige un diccionario.
-    raise NotImplementedError("Completa los TODO 3–6 del laboratorio")
+    client = requests if session is None else session
+    try:
+        response = client.post(
+            f"{base_url.rstrip('/')}/v1/predictions",
+            json=payload,
+            headers={"Accept": "application/json"},
+            timeout=timeout,
+            # Una redirección 307/308 podría volver a enviar el POST con los datos.
+            allow_redirects=False,
+        )
+        response.raise_for_status()
+    except requests.Timeout as error:
+        raise PredictionClientError("Se agotó el tiempo de espera.") from error
+    except requests.ConnectionError as error:
+        raise PredictionClientError("No se pudo conectar con la API.") from error
+    except requests.HTTPError as error:
+        status = error.response.status_code if error.response is not None else None
+        raise PredictionClientError(
+            "La API rechazó la petición.", status_code=status
+        ) from error
+    except requests.RequestException as error:
+        raise PredictionClientError("No se pudo completar la petición.") from error
+    if not 200 <= response.status_code < 300:
+        raise PredictionClientError(
+            "La API no devolvió un estado de éxito.", status_code=response.status_code
+        )
+    try:
+        body = response.json()
+    except ValueError as error:
+        raise PredictionClientError("La API no devolvió JSON válido.") from error
+    if not isinstance(body, dict):
+        raise PredictionClientError("La respuesta debe ser un objeto JSON.")
+    return body

@@ -34,7 +34,7 @@ prototipo → tracking → proyecto reproducible → inferencia local
 | [S12](semana12/) | Docker Compose, variables, redes y wiring front + API. | Stack local completo levantable desde un checkout limpio. | Integra las imágenes de S11 en un sistema reproducible. |
 | [S13](semana13/) | DevOps/MLOps, CI/CD, tests, build, despliegue y monitorización. | Pipeline básico, evidencias de operación y presentación final, incluyendo model drift. | Cierra el ciclo de entrega y operación del proyecto. |
 
-Las carpetas de S2 y S7–S13 contienen actualmente el marcador `.gitkeep`; sus
+Las carpetas de S2 y S8–S13 contienen actualmente el marcador `.gitkeep`; sus
 materiales se incorporarán manteniendo este mismo recorrido. Las semanas con
 material ya disponible tienen su guía específica en el `README.md` de cada
 carpeta.

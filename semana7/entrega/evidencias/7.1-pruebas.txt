@@ -1,0 +1,26 @@
+
+$ uv sync --locked
+Resolved 13 packages in 5ms
+Checked 11 packages in 1ms
+
+$ uv run --locked python -m unittest discover -s exercises/02-api-client-lab/problem/starter -p test_*.py -v
+test_converts_connection_error (test_client.ClientExerciseTest.test_converts_connection_error) ... ok
+test_converts_http_error_and_preserves_status (test_client.ClientExerciseTest.test_converts_http_error_and_preserves_status) ... ok
+test_converts_timeout (test_client.ClientExerciseTest.test_converts_timeout) ... ok
+test_rejects_success_json_that_is_not_an_object (test_client.ClientExerciseTest.test_rejects_success_json_that_is_not_an_object) ... ok
+test_sends_json_accept_and_timeout (test_client.ClientExerciseTest.test_sends_json_accept_and_timeout) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+
+$ uv run --locked python -m pytest -q
+...................................                                      [100%]
+35 passed in 4.26s
+
+$ uv run --locked ruff check .
+All checks passed!
+
+$ uv run --locked ruff format --check .
+61 files already formatted

@@ -1,0 +1,4 @@
+Starter docente sin resolver: 5 tests ejecutados; 5 errores esperados (NotImplementedError).
+POST real 200: {"machine_id": "pump-017", "prediction": {"label": "maintenance_required", "risk_score": 0.85}, "model_version": "pump-risk-1.0.0", "request_id": "req_9dc65cc968a6"}
+POST real 422: La API rechazó la petición.
+Redirección 307: un POST a /v1/predictions; cero al destino.

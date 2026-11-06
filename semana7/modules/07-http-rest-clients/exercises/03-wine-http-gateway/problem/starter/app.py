@@ -1,4 +1,4 @@
-"""Solución S6: evolución avanzada de la app Streamlit de S5."""
+"""S7: la interfaz de S6 conectada al gateway HTTP."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ from model_ui.gateway import (
     PackagedBundleGateway,
     UnavailableGateway,
 )
-from model_ui.http_gateway import HttpInferenceGateway  # noqa: F401 - pista S7.5
+from model_ui.http_gateway import HttpInferenceGateway
 from model_ui.session import (
     LAST_STATE_KEY,
     LAST_VALUES_KEY,
@@ -45,16 +45,12 @@ def build_gateway(
     bundle_value: str | None,
     api_url: str | None = None,
 ) -> InferenceGateway:
-    """Selecciona el bundle configurado o conserva el gateway demo de S5."""
-
-    # TODO S7.5: si api_url contiene una URL, prioriza
-    # HttpInferenceGateway(api_url) sobre los gateways locales de S6.
+    """Prioriza HTTP cuando se configura MODEL_API_URL."""
+    if api_url and api_url.strip():
+        return HttpInferenceGateway(api_url)
     if not bundle_value:
         return DemoGateway()
-    try:
-        return PackagedBundleGateway.from_bundle_path(Path(bundle_value))
-    except Exception as error:  # noqa: BLE001 - se convierte en estado visible
-        return UnavailableGateway(str(error))
+    return PackagedBundleGateway.from_bundle_path(Path(bundle_value))
 
 
 def collect_values(st: Any) -> tuple[bool, dict[str, float]]:
@@ -93,50 +89,44 @@ def get_cached_gateway(
     ) -> InferenceGateway:
         return build_gateway(configured_bundle, configured_api_url)
 
-    return cached_gateway(bundle_value, api_url)
+    try:
+        return cached_gateway(bundle_value, api_url)
+    except Exception as error:  # noqa: BLE001 - frontera de carga del recurso
+        return UnavailableGateway(str(error))
 
 
 def render_state(st: Any, state: UiState, target: Any | None = None) -> None:
-    """Renderiza un `UiState` en la pantalla o en un placeholder."""
-
-    output = target or st
+    """Muestra el estado actual y la recuperación disponible."""
+    output = st if target is None else target
     if state.phase == "idle":
-        output.info("Completa el formulario y pulsa “Ejecutar inferencia”.")
-        return
-    if state.phase == "loading":
+        output.info("Completa el formulario y pulsa «Ejecutar inferencia».")
+    elif state.phase == "loading":
         output.info("Validando la muestra y ejecutando el modelo…")
-        return
-    if state.phase == "error" and state.error:
+    elif state.error is not None:
         output.error(state.error.title)
         output.write(state.error.message)
         output.info(state.error.recovery)
-        output.caption(f"Request ID: {state.error.request_id}")
-        return
-    if state.phase != "success" or state.view is None:
-        return
-
-    view = state.view
-    output.success(view.quality_label)
-    columns = output.columns(3)
-    columns[0].metric("Confianza", f"{view.confidence:.0%}")
-    columns[1].metric("Latencia", f"{view.latency_ms:.1f} ms")
-    columns[2].metric("Nivel", view.confidence_label)
-    if view.confidence_level == "low":
-        output.warning(view.confidence_message)
-    else:
-        output.info(view.confidence_message)
-    if view.latency_status == "above_target":
-        output.warning(view.latency_message)
-    else:
-        output.caption(view.latency_message)
-    with output.expander("Trazabilidad"):
-        output.write(
-            {
-                "model_version": view.model_version,
-                "preprocessing_version": view.preprocessing_version,
-                "request_id": state.request_id,
-            }
+        with output.expander("Trazabilidad"):
+            output.caption(f"Request ID: {state.error.request_id}")
+    elif state.view is not None:
+        view = state.view
+        output.success(view.quality_label)
+        category, confidence, latency = output.columns(3)
+        category.metric("Categoría", view.quality_band)
+        confidence.metric(view.confidence_label, f"{view.confidence:.0%}")
+        latency.metric("Latencia", f"{view.latency_ms:.1f} ms")
+        show_confidence = (
+            output.warning if view.confidence_level == "low" else output.info
         )
+        show_confidence(view.confidence_message)
+        show_latency = (
+            output.warning if view.latency_status == "above_target" else output.caption
+        )
+        show_latency(view.latency_message)
+        with output.expander("Trazabilidad"):
+            output.write(f"Modelo: {view.model_version}")
+            output.write(f"Preprocesado: {view.preprocessing_version}")
+            output.caption(f"Request ID: {state.request_id}")
 
 
 def main() -> None:
@@ -167,9 +157,14 @@ def main() -> None:
         with st.status("Ejecutando inferencia…", expanded=False) as status:
             state = controller.submit(
                 values,
-                emit=lambda event: render_state(st, event, state_slot),
+                emit=lambda event: (
+                    render_state(st, event, state_slot)
+                    if event.phase == "loading"
+                    else None
+                ),
             )
             st.session_state[LAST_STATE_KEY] = state
+            state_slot.empty()
             status.update(
                 label=(
                     "Inferencia completada"

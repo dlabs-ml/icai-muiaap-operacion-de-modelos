@@ -1,5 +1,7 @@
 # Semana 7 — HTTP, REST, JSON y clientes de API
 
+[Ver mi entrega, comprobaciones y evidencias](REPORT.md).
+
 La semana introduce la frontera HTTP sin adelantar la construcción de un
 backend. El alumnado observa contratos, consume endpoints y conecta el proyecto
 Wine Quality iniciado en la semana 1 con un servicio remoto preparado.

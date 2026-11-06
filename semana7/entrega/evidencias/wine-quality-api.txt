@@ -1,0 +1,27 @@
+GET /health
+HTTP/1.1 200 OK
+Server: S7WineQualityAPI/1.0 Python/3.12.13
+Date: Fri, 06 Nov 2026 16:30:02 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 154
+X-Request-Id: req_b215ce8f1c5b
+
+{"status": "ok", "service": "wine-quality-prediction", "model_status": "ready", "model_version": "wine-quality-demo-v1", "request_id": "req_b215ce8f1c5b"}
+POST /v1/predictions · prediction-valid.json · Content-Type: application/json · Accept: application/json
+HTTP/1.1 200 OK
+Server: S7WineQualityAPI/1.0 Python/3.12.13
+Date: Fri, 06 Nov 2026 16:30:02 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 192
+X-Request-Id: req_49d4dbd1c724
+
+{"prediction": {"quality_band": "needs_review", "confidence": 0.71, "model_version": "wine-quality-demo-v1", "preprocessing_version": "wine-red-features-v1"}, "request_id": "req_49d4dbd1c724"}
+POST /v1/predictions · prediction-invalid.json · Content-Type: application/json · Accept: application/json
+HTTP/1.1 422 Unprocessable Entity
+Server: S7WineQualityAPI/1.0 Python/3.12.13
+Date: Fri, 06 Nov 2026 16:30:02 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 207
+X-Request-Id: req_d5fb109d099d
+
+{"error": {"code": "validation_error", "message": "JSON is valid but violates the input contract", "fields": [{"field": "features.alcohol", "message": "must be a number"}]}, "request_id": "req_d5fb109d099d"}
