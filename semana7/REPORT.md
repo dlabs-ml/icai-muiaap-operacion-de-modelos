@@ -20,8 +20,8 @@
 
 ## Ejecución y resultados
 
-`>` Usé un entorno virtual con `requests`. El [README](README.md) recoge los comandos para instalar las dependencias, ejecutar las pruebas y repetir la consulta.
+`>` Usé un entorno virtual con `requests`. El [README](README.md) recoge los comandos para instalar las dependencias y repetir la consulta.
 
-`>>` [Cliente](entrega/aemet/climatologia.py) · [Pruebas con respuestas simuladas](entrega/aemet/test_climatologia.py) · [Salida de las pruebas](entrega/evidencias/aemet-pruebas.txt) · [Ejecución real](entrega/evidencias/aemet-ejecucion-real.txt) · [JSON del 1 de octubre](entrega/evidencias/datos_primerdia_octubre_2019.json).
+`>>` [Cliente](entrega/aemet/climatologia.py) · [Ejecución real](entrega/evidencias/aemet-ejecucion-real.txt) · [JSON del 1 de octubre](entrega/evidencias/datos_primerdia_octubre_2019.json).
 
 `=>` Recibí 30 observaciones de la estación `3194U`, una por cada día del intervalo. Comprobé que el registro del 1 de octubre coincidía campo por campo con el JSON de la solución facilitada.

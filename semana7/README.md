@@ -9,7 +9,6 @@ Con Python 3.12 o superior y `uv`, desde la raíz del repositorio:
 ```bash
 cd semana7
 uv sync --locked
-uv run --locked python -m unittest discover -s entrega/aemet -v
 ```
 
 Para hacer la consulta real, configura `AEMET_API_KEY` en el entorno y ejecuta:
