@@ -54,6 +54,15 @@ MODEL_API_URL=http://127.0.0.1:8000 uv run --locked --extra app streamlit run ap
 
 `~>` El PDF de `AEMET.zip` fija el cierre en el 30 de octubre de 2019 a las 23:59:59 UTC. El script de ejemplo del ZIP usa el día 31. Seguí el intervalo explícito del PDF.
 
+`~>` Incorporé el guardado del primer día de la solución de la carpeta. Selecciono el registro por su fecha para que el resultado no dependa del orden de la respuesta. La salida estándar conserva el JSON de la consulta completa.
+
+`>` Para guardar el primer día, ejecuto desde la raíz del módulo:
+
+```bash
+uv run --locked python ../../entrega/aemet/climatologia.py \
+  --guardar-primer-dia /tmp/datos_primerdia_octubre_2019.json
+```
+
 ## Comprobaciones y resultados
 
 `>>` Las APIs docentes devolvieron `200` para salud y predicción válida y `422` para la entrada inválida. En Streamlit probé [modo demo](entrega/evidencias/7.2-demo.jpg), [HTTP 503](entrega/evidencias/7.2-http-503.jpg) y [reintento con el servicio restaurado](entrega/evidencias/7.2-http-reintento.jpg). El modelo remoto de aula se identifica como `wine-quality-demo-v1`.

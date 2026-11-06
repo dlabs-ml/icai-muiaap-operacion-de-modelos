@@ -1,8 +1,13 @@
+import json
+from contextlib import redirect_stderr, redirect_stdout
+from io import StringIO
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest import TestCase
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 import requests
-from climatologia import obtener_climatologia
+from climatologia import main, obtener_climatologia
 
 
 class ClimatologiaTest(TestCase):
@@ -48,3 +53,33 @@ class ClimatologiaTest(TestCase):
         with self.assertRaisesRegex(ValueError, "enlace"):
             obtener_climatologia(sesion, "clave-ficticia")
         sesion.get.assert_called_once()
+
+    def test_exporta_el_primer_dia_aunque_el_servidor_lo_devuelva_despues(self):
+        primero = {
+            "fecha": "2019-10-01",
+            "nombre": "ESTACIÓN DE PRUEBA",
+            "tmed": "19,0",
+            "prec": "0,0",
+        }
+        observaciones = [{"fecha": "2019-10-02"}, primero]
+        salida = StringIO()
+        resumen = StringIO()
+        with TemporaryDirectory() as carpeta:
+            destino = Path(carpeta) / "primer-dia.json"
+            with (
+                patch.dict("os.environ", {"AEMET_API_KEY": "clave-ficticia"}),
+                patch(
+                    "climatologia.obtener_climatologia",
+                    return_value=("3194U", observaciones),
+                ),
+                redirect_stdout(salida),
+                redirect_stderr(resumen),
+            ):
+                main(["--guardar-primer-dia", str(destino)])
+
+            self.assertEqual(json.loads(destino.read_text(encoding="utf-8")), primero)
+        self.assertEqual(
+            json.loads(salida.getvalue()),
+            {"indicativo": "3194U", "observaciones": observaciones},
+        )
+        self.assertIn("2 observaciones", resumen.getvalue())
