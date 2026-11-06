@@ -28,7 +28,7 @@ def request_prediction(
             json=payload,
             headers={"Accept": "application/json"},
             timeout=timeout,
-            # Una redirección 307/308 podría volver a enviar el POST con los datos.
+            # Desactivo las redirecciones porque un 307 o un 308 reenviaría las medidas.
             allow_redirects=False,
         )
         response.raise_for_status()

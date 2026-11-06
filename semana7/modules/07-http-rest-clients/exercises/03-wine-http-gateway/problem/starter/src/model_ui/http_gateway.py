@@ -54,7 +54,7 @@ class HttpInferenceGateway:
         """Envia la muestra por HTTP y devuelve el contrato interno de S6."""
 
         self.last_request_id = None
-        # requests sigue redirecciones de POST por defecto; el contrato solo admite 2xx.
+        # Desactivo las redirecciones para evitar que requests repita el POST.
         options = (
             {"allow_redirects": False}
             if isinstance(self._session, requests.Session)
