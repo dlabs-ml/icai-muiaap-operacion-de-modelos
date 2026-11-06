@@ -9,7 +9,7 @@
 | 7.1 · API de bombas | [Microejercicios](entrega/microejercicios.md), [ficha de Prediction](entrega/prediction.md) y [cliente](modules/07-http-rest-clients/exercises/02-api-client-lab/problem/starter/client.py) | [curl](entrega/evidencias/pump-maintenance-api.txt), [cliente real](entrega/evidencias/7.1-cliente-real.txt) y [tests](entrega/evidencias/7.1-pruebas.txt) |
 | 7.2 · Wine Quality por HTTP | [Starter](modules/07-http-rest-clients/exercises/03-wine-http-gateway/problem/starter) | [curl](entrega/evidencias/wine-quality-api.txt), [Streamlit](entrega/evidencias/7.2-streamlit.txt) y [34 tests](entrega/evidencias/7.2-pruebas.txt) |
 | APIs públicas | [Colección Postman](entrega/postman/APIs-publicas.postman_collection.json) | [Respuestas resumidas](entrega/evidencias/apis-publicas.txt) y [Newman](entrega/evidencias/postman-newman.txt): 8 peticiones, 24 comprobaciones |
-| Requests + AEMET | [Cliente](entrega/aemet/climatologia.py) y [pruebas](entrega/aemet/test_climatologia.py) | [Pruebas con respuestas simuladas](entrega/evidencias/aemet-pruebas.txt); descarga real pendiente de clave |
+| Requests + AEMET | [Cliente](entrega/aemet/climatologia.py) y [pruebas](entrega/aemet/test_climatologia.py) | [Descarga real: 30 observaciones](entrega/evidencias/aemet-ejecucion-real.txt) y [pruebas con respuestas simuladas](entrega/evidencias/aemet-pruebas.txt) |
 
 `~>` Uso `json=` para serializar el cuerpo, `Accept` para indicar que espero JSON y un timeout para limitar la espera. Valido status y estructura por separado. Un `POST` que supera el timeout puede haber llegado al servidor, así que dejo el reintento como decisión de la persona que usa la app y rechazo redirecciones que reenviarían las medidas.
 
@@ -40,4 +40,4 @@ MODEL_API_URL=http://127.0.0.1:8000 uv run --locked --extra app streamlit run ap
 
 `>` Para AEMET, configuro `AEMET_API_KEY` en mi entorno y ejecuto desde la raíz del módulo `uv run --locked python ../../entrega/aemet/climatologia.py`. El cliente busca Madrid, Ciudad Universitaria en el inventario y consulta del 1 al 30 de octubre de 2019, según el intervalo explícito del enunciado. La [ficha de la estación](https://www.aemet.es/es/eltiempo/observacion/ultimosdatos?l=3194U) indica `3194U`; el cliente lo obtiene del inventario. Uso los endpoints de [AEMET OpenData](https://opendata.aemet.es/dist/).
 
-`=>` Verifiqué los clientes docentes, los recorridos de la UI y las APIs públicas. La descarga histórica de AEMET queda pendiente de una clave válida en el entorno.
+`=>` Verifiqué los clientes docentes, los recorridos de la UI y las APIs públicas. En AEMET confirmé el indicativo `3194U` y recibí una observación por día del 1 al 30 de octubre de 2019, sin fechas repetidas ni registros de otra estación.

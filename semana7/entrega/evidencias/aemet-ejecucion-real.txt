@@ -1,0 +1,9 @@
+Fuente: AEMET OpenData (https://opendata.aemet.es/dist/).
+Ejecución local del cliente climatologia.py contra la API oficial.
+
+Estación obtenida del inventario: MADRID, CIUDAD UNIVERSITARIA (3194U).
+Observaciones descargadas: 30, del 2019-10-01 al 2019-10-30 inclusive.
+Comprobación: una observación por día y el mismo indicativo en las 30 filas.
+
+Primera observación (extracto del JSON de AEMET):
+{"fecha":"2019-10-01","tmed":"19,0","tmin":"10,0","tmax":"28,1","prec":"0,0"}
