@@ -1,0 +1,6 @@
+Bundle ausente: Modelo no disponible | Comprueba que el modelo esté disponible y reintenta.
+Reintento tras restaurar el bundle en la misma ruta: needs_review wine-quality-rf-v1 wine-red-features-v1
+Rerun: resultado persistente; 2 peticiones, 1 éxito y 1 error.
+Limpiar: vuelve a idle y conserva telemetría.
+Contrato de entrada: invalid_input | Corrige los campos y vuelve a enviar.
+Reloj simulado: ['loading', 'success'] | 330.0 ms | La respuesta llegó, pero la latencia supera el objetivo técnico de la demo.

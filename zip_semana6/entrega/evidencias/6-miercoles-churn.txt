@@ -1,0 +1,37 @@
+Semana 6 · Churn con memoria · comprobación del ejercicio del miércoles
+Fecha: 2026-11-06
+Entorno docente: Python 3.13 y Streamlit 1.65.0.
+
+Material: comparé la carpeta de clase con el ZIP original. El notebook conserva
+las mismas 23 celdas fuente. Tomé como punto de partida el script original del
+ZIP, que contiene los huecos A, B y C.
+
+Starter original (copia temporal del ZIP)
+$ python -m pytest -q tests
+5 passed in 1.08s
+
+La comprobación de mi entrega sobre el starter original dio 1 failed. Faltaba
+el contador al arrancar la app.
+
+Notebook docente (copia temporal del ZIP, ejecutada con nbclient)
+23 celdas originales ejecutadas y cinco apps con /_stcore/health = HTTP 200.
+La comprobación del ejemplo registró 3 filas tras tres envíos y un rerun de
+ayuda. Cerré las cinco apps al acabar.
+
+Solución (desde la raíz del repositorio)
+$ python -m pytest -q semana6/entrega/miercoles
+1 passed in 0.43s
+
+La comprobación con AppTest verifica el contador en 0 al arrancar, 0 tras
+editar sin enviar, 1/2/3 después de los tres envíos y que cada fila recoge
+los valores del envío. Mostrar ayuda conserva 3 y Vaciar historial vuelve
+a 0 y retira la tabla.
+
+$ ruff check semana6/entrega/miercoles
+All checks passed!
+
+$ ruff format --check semana6/entrega/miercoles
+3 files already formatted
+
+Para abrir la app desde la raíz del repositorio con el entorno docente activo:
+$ python -m streamlit run semana6/entrega/miercoles/05_practica_starter.py

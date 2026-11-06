@@ -1,0 +1,6 @@
+Verificación con AppTest y el gateway del bundle real de S4.
+Arranque: 11 campos; 0 llamadas al bundle real.
+Un submit: 1 llamada real; Categoría (quality_band): needs_review | Confianza (confidence): 0.86 | Modelo (model_version): wine-quality-rf-v1 | Preprocesado (preprocessing_version): wine-red-features-v1
+Límite inferior, alcohol = 5,0: 1 llamada adicional; Categoría (quality_band): needs_review
+Bundle ausente: 0 llamadas adicionales; No se pudo cargar el bundle de S4. Configura MODEL_UI_BUNDLE y vuelve a ejecutar la aplicación.
+Edición sin enviar: 0 llamadas al gateway.

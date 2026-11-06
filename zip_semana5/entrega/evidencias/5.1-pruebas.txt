@@ -1,0 +1,16 @@
+
+$ uv sync --locked
+Resolved 46 packages in 4ms
+Prepared 1 package in 440ms
+Uninstalled 1 package in 0.99ms
+Installed 1 package in 1ms
+
+$ uv run --locked  python -m pytest -q
+.............                                                            [100%]
+13 passed in 0.01s
+
+$ uv run --locked ruff check .
+All checks passed!
+
+$ uv run --locked ruff format --check .
+7 files already formatted

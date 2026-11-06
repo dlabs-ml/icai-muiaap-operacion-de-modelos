@@ -1,0 +1,5 @@
+Sin petición | métricas: [] | avisos: []
+Ejecutando | métricas: [] | avisos: []
+Éxito — confianza intermedia | métricas: ['Resultado aceptable', '74%', '118 ms'] | avisos: []
+Éxito — confianza baja y lento | métricas: ['Requiere revisión', '51%', '412 ms'] | avisos: ['Confianza baja: el resultado es orientativo y requiere revisión; no es una garantía.', 'La respuesta llegó, pero supera el objetivo técnico de la demo.']
+Error recuperable | métricas: [] | avisos: []

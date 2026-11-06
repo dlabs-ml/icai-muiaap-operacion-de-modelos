@@ -1,0 +1,6 @@
+Streamlit local, comprobado en Chrome.
+Arranque: formulario con cuatro controles y sin predicción.
+Edición antes del primer envío: 2 meses, 95 €, 4 llamadas, sin contrato anual; sin predicción.
+Primer envío: Baja probable; score de riesgo 0,95 y explicación de la regla docente.
+Segundo perfil enviado: 36 meses, 35 €, 0 llamadas, con contrato anual; Permanencia probable; score 0,05.
+El score es sintético y no representa una probabilidad calibrada.
